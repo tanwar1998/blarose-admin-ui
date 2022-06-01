@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import CarosuleComponent from '../../../components/CarosuleComponent/index.jsx';
 import Slider1 from '../../../assets/img/home-slider11.jpg';
 import Slider2 from '../../../assets/img/home-slider2.jpg';
@@ -32,7 +32,7 @@ export default function LandingComponent() {
             {
                 images.map((data)=>(
                     <div className='hor-row slider-img-container'>
-                        <img src = { data.img } />
+                        <img src = { data.img } alt = 'slider'/>
                         <div className='hor-row img-outer'>
                             <div className='hor-row landing-text'>
                                 LIFESTYLE AND FASHION EXHIBITIONS

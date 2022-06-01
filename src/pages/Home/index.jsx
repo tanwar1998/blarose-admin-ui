@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import LandingComponent from './components/landing.jsx';
 import {HomeContainer} from './style.js';
 import Navbar from '../../specificComponents/navbar/index.jsx';

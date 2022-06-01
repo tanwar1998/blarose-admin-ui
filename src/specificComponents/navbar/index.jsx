@@ -26,7 +26,7 @@ export default function Navbar() {
     return (
       <NavigationBarContainer>
           <div className='hor-row logo-container'>
-            <img src={Logo} />
+            <img src={Logo} alt = 'logo'/>
           </div>
           <div className='hor-row nav-item-container'>
               {navItem.map((item) => (
