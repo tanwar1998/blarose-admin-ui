@@ -7,6 +7,10 @@ export const NavigationBarContainer = styled.div`
     float: left; 
     box-sizing: border-box;
     grid-template-columns: 200px auto;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: #fff;
 
     .logo-container{
         img{

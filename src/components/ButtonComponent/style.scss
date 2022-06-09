@@ -1,0 +1,21 @@
+
+.button-container-main{
+    width: 100%;
+    display: inline-block;
+    float: none;
+    position: relative;
+    
+    .MuiButtonBase-root{
+        background: #FA4DAC;
+        border-radius: 15px;
+
+        &:hover{    
+            background: #d74193;
+        }
+
+    }
+
+}
+
+@media only screen and (max-width: 768px){   
+}
