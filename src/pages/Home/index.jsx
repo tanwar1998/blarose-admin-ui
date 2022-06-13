@@ -2,11 +2,14 @@ import React from 'react';
 import LandingComponent from './components/landing.jsx';
 import {HomeContainer} from './style.js';
 import Navbar from '../../specificComponents/navbar/index.jsx';
+import FooterContainer from '../../specificComponents/footer/index.jsx';
 import Contempolary from  './components/creativeCotempolary';
 import SuccessStory from './components/successStory.jsx';
 import PremierProperty from './components/premierProperty.jsx';
 import Service from './components/service.jsx';
 import Register from './components/register.jsx';
+import Work from './components/work.jsx';
+
 
 
 export default function Invoices() {
@@ -20,7 +23,9 @@ export default function Invoices() {
           <PremierProperty/>
           <Service/>
           <Register/>
+          <Work/>
         </HomeContainer>
+        <FooterContainer/>
       </>
     );
   }

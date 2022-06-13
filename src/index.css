@@ -25,3 +25,14 @@ code {
   width: 100%;
   float: left;
 }
+
+.MuiPaper-elevation{
+  width: calc(100% - 30px);
+  max-width: 100%!important;
+  top: 0;
+  height: 100vh!important;
+  margin: 0;
+  max-height: 100vh!important;
+  left: -35px;
+
+}

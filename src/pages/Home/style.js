@@ -57,10 +57,12 @@ export const HomeContainer = styled.div`
     }
     
     .container-main{
-        margin: 50px 0;
-        max-width: 1200px;
+        margin: 50px auto;
         display: inline-block;
         float: none;
+        max-width: 1240px;
+        padding: 0 20px;
+        box-sizing: border-box;
     }
 
     .creative-contempolary-container{
@@ -83,7 +85,7 @@ export const HomeContainer = styled.div`
         .success-story-card-container{
             text-align: center;
             margin: 50px 0 20px;
-            display: flex;
+            display: inline-table;
             justify-content: center;
 
 
@@ -128,6 +130,20 @@ export const HomeContainer = styled.div`
     }
 
     .premier-property-container{
+        position: relative;
+        overflow: hidden;
+
+        .premier-back-container{
+            background: #ffe1f2;
+            position: absolute; 
+            border-radius: 10px 10px 0 0;
+            bottom: 0;
+            height: calc(100% - 200px);
+            left: 8px;
+            width: calc(100% - 20px);    
+            background: linear-gradient(45deg, #fa4dac, #d34090);
+
+        }
         .premier-card-container{
             margin: 50px 0;
             display: flex;
@@ -252,12 +268,88 @@ export const HomeContainer = styled.div`
                 box-sizing: border-box;
 
                 img{
-                    width: 100%:
+                    width: 100%;
                 }
             }
         }
 
     }
 
+    .work-done-container-main{
+        position: relative;
+        color: #ffffff;
+        text-align: center;
+        background-color: #FA4DAC;
 
+            .bottom-block{
+                width: 50px;
+                height: 50px;
+                background: #fa4dac;
+                position: absolute;
+                bottom: -25px;
+                transform: rotate(45deg);
+                left: calc(50% - 25px);
+                z-index: 1;
+            
+            }
+
+        .work-content-main{
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-gap: 20px;
+            margin-bottom: 80px;
+
+
+            h2{
+                color: #fff;
+                margin-bottom: 10px;
+                font-size: 45px;
+
+            }
+        }
+        .work-under-line-container{
+
+            .work-under-line{
+                width: 50px;
+                height: 4px;
+                background: #fff;
+                display: inline-block;
+                margin: 0 0 15px;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 992px){   
+
+        .service-container-main .service-card-container{
+            display: block;
+            text-align: center;
+        }
+    }
+
+    @media only screen and (max-width: 768px){ 
+        
+        .premier-property-container .premier-card-container{
+            display: block;
+
+            .card-main{
+                display: inline-grid;
+            }
+        }
+        .register-container-main{
+            padding: 10px 0;
+
+            .register-content-main{
+                display: block;
+
+                .right-side-container{
+                    display: none;
+                }
+                .left-side-container .two-element-container{
+                    grid-gap: 15px;
+
+                }
+            }
+        }
+    }
 `;

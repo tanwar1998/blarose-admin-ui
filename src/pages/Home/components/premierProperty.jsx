@@ -31,8 +31,9 @@ export default function PremierProperty() {
         <h2>
             Premium Properties where we delivered our B2C shows/exhibitions.
         </h2>
-        <div className='hor-row premier-card-container'>
 
+        <div className='hor-row premier-back-container'></div>
+        <div className='hor-row premier-card-container'>
             { property.map((item)=>(
                 <div className='card-main'>
                     <div className='hor-row city-name'>
@@ -44,7 +45,6 @@ export default function PremierProperty() {
                             { '>> ' + add.address }
                         </div>
                     ))}
-                    
                 </div>
             ))}
         </div>
