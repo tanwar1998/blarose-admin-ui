@@ -56,14 +56,6 @@ export const HomeContainer = styled.div`
         }
     }
     
-    .container-main{
-        margin: 50px auto;
-        display: inline-block;
-        float: none;
-        max-width: 1240px;
-        padding: 0 20px;
-        box-sizing: border-box;
-    }
 
     .creative-contempolary-container{
 
@@ -234,6 +226,7 @@ export const HomeContainer = styled.div`
         background-size: cover;
         padding: 10px;
         min-height: 400px;
+        background-position: center;
         box-sizing: border-box;
 
 

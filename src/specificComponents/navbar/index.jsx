@@ -5,6 +5,7 @@ import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import {  Link } from "react-router-dom";
 
 const navItem = [
     {
@@ -14,7 +15,17 @@ const navItem = [
         key: 'SERVICES'
     },
     {
-        key: 'ABOUT US'
+        key: 'ABOUT US',
+        subItem: [
+            {
+                label: 'About Us',
+                link: 'about-us'
+            },
+            {
+                label: 'Our Team',
+                link: 'our-team'
+            }
+        ]
     },
     {
         key: 'CONTACT US'
@@ -47,6 +58,21 @@ export default function Navbar() {
                         {navItem.map((item) => (
                                 <div className='nav-item'>
                                     { item.key }
+
+                                {item.subItem && <div className='nav-hover-content'>
+                                    <div className='hor-row'>
+                                        <div className='pointer-icon'/>
+                                    </div>
+
+                                    {
+                                        item.subItem.map((subItem, i)=>(
+                                            <div className='hor-row nav-label'
+                                                style={{borderBottom: `${i !== (item.subItem.length -1) ? '1px solid #fff' : ''}`}}>
+                                                    <Link to={"/" + subItem.link}>{ subItem.label } </Link>
+                                            </div>
+                                        ))
+                                    }
+                                </div>}
                                 </div>
                         )) }
                     </div>

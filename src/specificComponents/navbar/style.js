@@ -63,12 +63,55 @@ export const NavigationBarContent = styled.div`
             transition: all ease-in 0.3s;
             padding: 20px 10px 10px;
             color: #000;
+            font-weight: 600;
+            position: relative;
             cursor: pointer;
             font-size: 14px;
             line-height: 40px;
+            transition: all ease-in 0.3s;
+
+            .nav-hover-content{
+                background: #FA4DAC;
+                color: #fff;
+                border-radius: 3px;
+                position: absolute;
+                text-align: left;
+                color: #fff;
+                padding: 0;
+                width: calc(100% + 20px);
+                top: 60px;
+                display: none;
+
+                .pointer-icon{
+                    position: absolute;
+                    top: -10px;
+                    left: 20px;
+                    height: 20px;
+                    width: 20px;                
+                    transform: rotate(45deg);
+                    background: #FA4DAC;
+                }
+                .nav-label{
+                    line-height: 20px;
+                    z-index: 2;
+                    padding: 6px 5px 6px 12px;
+                    font-size: 14px;
+                    font-weight: 500;
+                    transition: all ease-in 0.3s;
+
+                    &:hover{
+                        background: #d73d92;
+                    }
+                }
+            }
 
             &:hover{
                 color: #FA4DAC;
+
+                .nav-hover-content{
+                    display: block;
+
+                }
             }
         }
     }

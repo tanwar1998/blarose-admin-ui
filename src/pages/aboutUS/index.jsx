@@ -1,9 +1,14 @@
 import React from 'react';
+import AboutComponent from './components/about.jsx';
+import {AboutContainer} from './style.js';
+import OurTeam from './components/ourTeam.jsx';
 
-export default function Invoices() {
+
+export default function Invoices(props) {
     return (
-      <div>
-        <h2>About us</h2>
-      </div>
+        <AboutContainer>
+          {props.component === 'about-us' && <AboutComponent/>}
+          {props.component === 'our-team' && <OurTeam/>}
+        </AboutContainer>
     );
   }
