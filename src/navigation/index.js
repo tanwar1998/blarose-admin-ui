@@ -15,11 +15,9 @@ export default function App() {
         <Router>
             <Navbar/>
             <Routes >
-
                 <Route path="/" element={<Home />} />
                 <Route path="about-us" element={<AboutUs component = 'about-us'/>} />
                 <Route path="our-team" element={<AboutUs component = 'our-team'/>} />
-
             </Routes>
             <FooterContainer/>
         </Router>
