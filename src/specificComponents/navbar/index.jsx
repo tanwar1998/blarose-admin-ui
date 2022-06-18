@@ -9,10 +9,12 @@ import {  Link } from "react-router-dom";
 
 const navItem = [
     {
-        key: 'HOME'
+        key: 'HOME',
+        link: ' '
     },
     {
-        key: 'SERVICES'
+        key: 'SERVICES',
+        link: 'services'
     },
     {
         key: 'ABOUT US',
@@ -24,14 +26,20 @@ const navItem = [
             {
                 label: 'Our Team',
                 link: 'our-team'
-            }
+            },
+            {
+                label: 'Contact Us',
+                link: 'contact-us'
+            },
         ]
     },
     {
-        key: 'CONTACT US'
+        key: 'CLIENT',
+        link: 'client'
     },
     {
-        key: 'GALLERY'
+        key: 'GALLERY',
+        link: 'gallery'
     }
 ]
 
@@ -50,14 +58,13 @@ export default function Navbar() {
             <div className='hor-row nav-content-main'
                 style={{gridTemplateColumns: isMobile ? 'auto': 'auto auto'}}>
                 <div className='hor-row logo-container'>
-                    <img src={Logo} alt = 'logo' 
-                        onClick  = { () => setOpen(true) } />
+                    <img src={Logo} alt = 'logo' style={{marginBottom: isMobile? '40px' : '' }} />
                 </div>
                 { <div className='hor-row  desktop-block'>
                     <div className='hor-row nav-item-container'>
                         {navItem.map((item) => (
-                                <div className='nav-item'>
-                                    { item.key }
+                                <div className={'nav-item some' +  item.link} >
+                                    { item.link ? (<Link to={"/" + item.link}>{ item.key } </Link>) : item.key}
 
                                 {item.subItem && <div className='nav-hover-content'>
                                     <div className='hor-row'>
@@ -82,7 +89,21 @@ export default function Navbar() {
                         {open ? (
                             navItem.map((item) => (
                                 <div className='nav-item'>
-                                    { item.key }
+                                    { item.link ? (<Link to={"/" + item.link}>{ item.key } </Link>) : item.key}
+                                    {item.subItem && <div className='nav-hover-content'>
+                                        <div className='hor-row'>
+                                            <div className='pointer-icon'/>
+                                        </div>
+
+                                        {
+                                            item.subItem.map((subItem, i)=>(
+                                                <div className='hor-row nav-label'
+                                                    style={{borderBottom: `${i !== (item.subItem.length -1) ? '1px solid #fff' : ''}`}}>
+                                                        <Link to={"/" + subItem.link}>{ subItem.label } </Link>
+                                                </div>
+                                            ))
+                                        }
+                                    </div>}
                                 </div>
                         )) 
                         )

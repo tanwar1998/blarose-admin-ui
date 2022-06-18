@@ -121,14 +121,32 @@ export const NavigationBarContent = styled.div`
     }
 
     @media only screen and (max-width: 768px){ 
+        .nav-content-main {
+            padding: 5px 0 8px;
+        }
         .mobile-block{
             display: block;    
 
             .nav-item-container{
                 text-align: left;
+
+                .nav-hover-content{
+                    display: block;
+                    position: relative;
+                    color: #333;
+                    top: 5px;
+
+                    .pointer-icon{
+                        display: none;
+                    }
+                    .nav-label:hover{
+                        background: #fff;
+                    }
+                }
         
                 .nav-item{
                     width: 100%;
+                    box-sizing: border-box;
                     line-height: 20px;
                 }
             }

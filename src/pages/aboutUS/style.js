@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import OurTeam from '../../assets/img/our-team.jpg';
 import About from '../../assets/img/about.jpg';
+import ContactUS from '../../assets/img/contact-us.jpg';
 
 export const AboutContainer = styled.div`
     width: 100%;
@@ -119,6 +120,7 @@ export const AboutContainer = styled.div`
             grid-template-columns: auto auto auto auto;
             margin: 60px auto;
             grid-gap: 25px;
+            grid-gap: 55px 25px;
 
             .card-container{
                 text-align: left;
@@ -155,6 +157,96 @@ export const AboutContainer = styled.div`
         }
 
     }
+    .contact-us-container-main{
+
+        .contact-us-back-image{
+            background: url(${ContactUS});  
+            background-size: cover;
+            min-height: 300px;
+            background-position: right;
+            height: calc(100vh - 200px);
+            box-sizing: border-box;
+
+            .contact-content-back{
+                background: linear-gradient(45deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
+                color: #fff;
+                position: relative;
+                height: 100%;
+                font-size: 35px;
+                font-weight: bold;
+
+                div{
+                    position: absolute;
+                    top: calc(50% - 20px);
+                    color: #fff;
+                    font-size: 50px;
+                    width: 100%;
+                }
+            }
+        }
+
+        .contact-content-main{
+            display: grid;
+            grid-template-columns: auto auto;
+            margin: 60px auto;
+            grid-gap: 25px;
+
+            .contact-detail-content{
+                text-align: left;
+
+                h4{
+                    font-size: 15px;
+                    color: #777;
+                }
+                h3{
+                    font-size: 22px;
+                    color: #444;
+                }
+                .under-line-row{
+                    margin: -20px 0 20px 0;
+                    
+                    span{
+                        display: inline-block;
+                        width: 40px;
+                        height: 6px;
+                        background: #cccccc;
+                        margin: 20px auto 0px;
+                        border-radius: 3px;
+                    }
+                }
+                .content-row{
+                    color: #333;
+                    font-size: 13px;
+                    margin: 6px 0;
+
+                    .icon{
+                        margin: 0 10px -3px 0;
+                        font-size: 16px;
+                        color: #444;
+                    }
+                    a{
+                        color: #ef002a;
+                    }
+                }
+                .contact-form-content{
+                    padding: 25px 20px;
+                    background: #ededed;
+                    border-radius: 3px;
+                }
+            }
+        }
+    }
+
+
+    @media only screen and (max-width: 992px){
+        .our-team-container-main .team-card-container {
+            grid-template-columns: auto auto;
+
+            .card-container{
+                max-width: 100%;
+            }
+        }
+    }
 
     @media only screen and (max-width: 768px){
 
@@ -168,4 +260,11 @@ export const AboutContainer = styled.div`
             }
         }
      }
+
+    @media only screen and (max-width: 576px){
+        .our-team-container-main .team-card-container {
+            grid-template-columns: auto;
+        }
+    }
+    
 `;

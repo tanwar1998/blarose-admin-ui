@@ -79,12 +79,13 @@ export const HomeContainer = styled.div`
             margin: 50px 0 20px;
             display: inline-table;
             justify-content: center;
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            grid-gap: 30px 15px;
 
 
             .success-story-card{
                 display: inline-block;
-                width: 200px;
-                margin: 10px 10px;
                 border: 1px solid #ebc8cf;
                 border-radius: 10px;
                 padding: 15px;
@@ -126,14 +127,13 @@ export const HomeContainer = styled.div`
         overflow: hidden;
 
         .premier-back-container{
-            background: #ffe1f2;
             position: absolute; 
             border-radius: 10px 10px 0 0;
             bottom: 0;
-            height: calc(100% - 200px);
+            height: calc(100% - 280px);
             left: 8px;
             width: calc(100% - 20px);    
-            background: linear-gradient(45deg, #fa4dac, #d34090);
+            background: linear-gradient(45deg,#c3b6bd,#ffe1f2);
 
         }
         .premier-card-container{
@@ -314,10 +314,14 @@ export const HomeContainer = styled.div`
 
     @media only screen and (max-width: 992px){   
 
+        .success-story-container .success-story-card-container {
+            grid-template-columns: auto auto auto;
+        }
         .service-container-main .service-card-container{
             display: block;
             text-align: center;
         }
+
     }
 
     @media only screen and (max-width: 768px){ 
@@ -344,5 +348,39 @@ export const HomeContainer = styled.div`
                 }
             }
         }
+
+        .success-story-container .success-story-card-container {
+            grid-template-columns: auto auto;
+        }
     }
+    @media only screen and (max-width: 576px){
+        .landing-slider-container .slider-img-container img, .landing-slider-container .slider-img-container .img-outer {
+            height: calc(100vh - 200px);
+            min-height: 350px;
+        }
+        .work-done-container-main .work-content-main {
+            grid-template-columns: auto auto;
+        }
+        .premier-property-container {
+            .premier-back-container {
+                height: calc(100% - 300px);
+            }
+            .premier-card-container .card-main {
+                width: calc(100% - 20px);
+            }
+        }
+        .service-container-main .service-card-container .service-card-main{
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .success-story-container .success-story-card-container {
+            grid-template-columns: auto ;
+
+            .success-story-card{
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+     }
 `;

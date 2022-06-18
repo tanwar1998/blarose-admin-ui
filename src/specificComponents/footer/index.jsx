@@ -55,7 +55,7 @@ export default function Navbar() {
               </div>
 
               <div className='hor-row policy-content-main'>
-                © Blarose Trenta . All rights reserved.  | 
+                © Blarose Trenta . All rights reserved.  | {' '}
                 <a href='#policy'>
                   Privacy Policy
                 </a>

@@ -7,6 +7,8 @@ import {
 } from "react-router-dom";
 import Home from "../pages/Home/index.jsx";
 import AboutUs from "../pages/aboutUS/index.jsx";
+import Client from "../pages/Client/index.jsx";
+import Gallery from "../pages/Gallery/index.jsx";
 import Navbar from '../specificComponents/navbar/index.jsx';
 import FooterContainer from '../specificComponents/footer/index.jsx';
 
@@ -18,6 +20,9 @@ export default function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="about-us" element={<AboutUs component = 'about-us'/>} />
                 <Route path="our-team" element={<AboutUs component = 'our-team'/>} />
+                <Route path="contact-us" element={<AboutUs component = 'contact-us'/>} />
+                <Route path="client" element={<Client/>} />
+                <Route path="gallery" element={<Gallery/>} />
             </Routes>
             <FooterContainer/>
         </Router>
