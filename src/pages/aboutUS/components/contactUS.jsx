@@ -75,7 +75,6 @@ export default function ContactUS() {
                     <ButtonComponent label = 'Submit Details' />
                 </div>
               </div>
-
             </div>
           </div>
 
