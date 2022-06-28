@@ -22,7 +22,7 @@ export const NavigationBarContent = styled.div`
     max-width: 1240px;
     width: 100%;
     box-sizing: border-box;
-    padding: 0 20px;
+    padding: 0 20px 10px;
     box-sizing: border-box;    
     position: relative;
 
@@ -37,7 +37,7 @@ export const NavigationBarContent = styled.div`
 
     .nav-content-main, .mobile-nav-bar{
         display: grid;
-        padding: 10px 20px 8px;
+        padding: 8px 20px 0px;
         width: 100%;
         float: none;
         box-sizing: border-box;
@@ -49,7 +49,7 @@ export const NavigationBarContent = styled.div`
 
     .logo-container{
         img{
-            max-width: 200px;
+            max-width: 140px;
             width: calc(100% - 35px);
             float: left;
         }
@@ -61,7 +61,7 @@ export const NavigationBarContent = styled.div`
         .nav-item{
             display: inline-block;
             transition: all ease-in 0.3s;
-            padding: 20px 10px 10px;
+            padding: 10px 10px 5px;
             color: #000;
             font-weight: 600;
             position: relative;
@@ -122,7 +122,11 @@ export const NavigationBarContent = styled.div`
 
     @media only screen and (max-width: 768px){ 
         .nav-content-main {
-            padding: 5px 0 8px;
+            padding: 5px 0 0;
+
+            .subitem-container-nav:hover{
+                color: inherit;
+            }
         }
         .mobile-block{
             display: block;    
@@ -141,6 +145,8 @@ export const NavigationBarContent = styled.div`
                     }
                     .nav-label:hover{
                         background: #fff;
+                        color: #FA4DAC;
+                        
                     }
                 }
         

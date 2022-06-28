@@ -133,7 +133,7 @@ export const HomeContainer = styled.div`
             height: calc(100% - 280px);
             left: 8px;
             width: calc(100% - 20px);    
-            background: linear-gradient(45deg,#c3b6bd,#ffe1f2);
+            background: linear-gradient(45deg, #f1c7de, #ffe1f2);
 
         }
         .premier-card-container{
@@ -327,11 +327,12 @@ export const HomeContainer = styled.div`
     @media only screen and (max-width: 768px){ 
         
         .premier-property-container .premier-card-container{
-            display: block;
+            display: grid;
+            grid-template-columns: auto auto;
 
-            .card-main{
-                display: inline-grid;
-            }
+            // .card-main{
+                // display: inline-grid;
+            // }
         }
         .register-container-main{
             padding: 10px 0;
@@ -354,6 +355,9 @@ export const HomeContainer = styled.div`
         }
     }
     @media only screen and (max-width: 576px){
+        h2 {
+            font-size: 28px;
+        }
         .landing-slider-container .slider-img-container img, .landing-slider-container .slider-img-container .img-outer {
             height: calc(100vh - 200px);
             min-height: 350px;
@@ -365,13 +369,21 @@ export const HomeContainer = styled.div`
             .premier-back-container {
                 height: calc(100% - 300px);
             }
-            .premier-card-container .card-main {
-                width: calc(100% - 20px);
+            .premier-card-container {
+                display: grid;
+                grid-template-columns: auto;
+
+                .card-main {
+                    width: calc(100% - 20px);
+                }
             }
         }
         .service-container-main .service-card-container .service-card-main{
             width: 100%;
             margin: 20px 0;
+            &:hover{
+                margin: 20px 0;
+            }
         }
 
         .success-story-container .success-story-card-container {

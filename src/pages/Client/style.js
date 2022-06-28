@@ -91,4 +91,14 @@ export const ClientContainer = styled.div`
             grid-template-columns: auto auto;
         }
     }
+    @media only screen and (max-width: 576px){
+        .client-us-container-main .client-us-back-image {
+            min-height: 250px;
+            height: 250px;
+
+            .client-content-back div {
+                top: calc(50% - 50px);
+            }
+        }
+    }
 `;

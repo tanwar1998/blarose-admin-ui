@@ -259,11 +259,27 @@ export const AboutContainer = styled.div`
                 }
             }
         }
+        .contact-us-container-main .contact-content-main{
+            grid-template-columns: auto;
+        }
      }
 
     @media only screen and (max-width: 576px){
         .our-team-container-main .team-card-container {
             grid-template-columns: auto;
+        }
+        .our-team-container-main .our-team-back-image{
+            min-height: 250px;
+            height: 250px;
+        }
+        .contact-us-container-main .contact-us-back-image{
+            min-height: 250px;
+            height: 250px;
+
+        }
+        .about-us-container-main .about-us-back-image {
+            min-height: 250px;
+            height: 250px;
         }
     }
     

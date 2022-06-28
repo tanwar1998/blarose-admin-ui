@@ -87,4 +87,14 @@ export const GalleryContainer = styled.div`
             grid-template-columns: auto auto;
         }
     }
+    @media only screen and (max-width: 576px){
+        .gallery-us-container-main .gallery-us-back-image{
+            min-height: 250px;
+            height: 250px;
+
+            .gallery-content-back div {
+                top: calc(50% - 100px);
+            }
+        }
+    }
 `;
