@@ -6,6 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 
+import Dashboard from "../pages/Dashboard/index.jsx";
 import Login from "../pages/Login/index.jsx";
 import Navbar from '../specificComponents/navbar/index.jsx';
 import FooterContainer from '../specificComponents/footer/index.jsx';
@@ -15,7 +16,8 @@ export default function App() {
         <Router>
             <Navbar/>
             <Routes >
-                <Route path="/" element={<Login/>} />
+                <Route path="/login" element={<Login/>} />
+                <Route path="/" element={<Dashboard/>} />
             </Routes>
             <FooterContainer/>
         </Router>
