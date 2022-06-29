@@ -24,7 +24,17 @@ class InputComponent extends React.Component {
     render() {
         return (<div className='hor-row input-type-container-main'
             style={this.props.style} >
-                <input type = 'text' placeholder = { this.props.placeholder}/>
+                <input type = { this.props.type } 
+                placeholder = { this.props.placeholder}
+                value={this.props.value}
+                id = { this.props.inputID }
+                onChange={(event) => this.props.onChange(event.target.value)}
+                onKeyPress={(event) => {
+                    if (this.props.onSave && event.key === 'Enter') {
+                        this.props.onSave();
+                    }
+                }}
+                />
 
 
         </div>
