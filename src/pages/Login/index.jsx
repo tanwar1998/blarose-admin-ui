@@ -14,6 +14,8 @@ export default function Container(props) {
     // const postData = await getAPI(path, data);
     const postData = await postAPI(path, data);
 
+    console.log('postData>>>>>>>>>>>>>>>.', postData)
+
 
   }
 
