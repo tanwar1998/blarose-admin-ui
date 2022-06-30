@@ -89,7 +89,10 @@ function EnhancedTableHead(props) {
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
             >
-              {headCell.label}
+              <span style={{fontWeight: 'bold'}}>
+                {headCell.label}
+              </span>
+              
               {orderBy === headCell.id ? (
                 <Box component="span" sx={visuallyHidden}>
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
@@ -143,7 +146,7 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          Nutrition
+          { props.title }
         </Typography>
       )}
 
@@ -177,6 +180,7 @@ const EnhancedTableToolbar = (props) => {
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
   deleteItem: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
   editItem: PropTypes.func.isRequired,
 };
 
@@ -247,7 +251,9 @@ export default function EnhancedTable(props) {
       <Paper sx={{ width: '100%', mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} 
               deleteItem = {() => { props.deleteItem(selected)} }
-              editItem = {  () => props.editItem(selected) }/>
+              editItem = {  () => props.editItem(selected) }
+              title = { props.title }
+              />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}

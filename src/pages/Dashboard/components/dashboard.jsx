@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
-// import InputComponent from '../../../components/InputComponent/index.jsx';
+import InputComponent from '../../../components/InputComponent/index.jsx';
 import Table from '../../../components/Table/index.jsx';
+import Button from '@mui/material/Button';
+import Alert from '../../../components/Dialog/index.jsx';
+import DragAndDrop from '../../../components/DragAndDrop/index.jsx';
+import ButtonComponent from '../../../components/ButtonComponent/index.jsx';
 
 function createData(name, calories, fat, carbs, protein) {
   return {
@@ -66,6 +70,7 @@ const headCells = [
 
 export default function Home(props) {
   // const [email, setEmail] = useState('');
+  const [open, setOpen] = useState(true);
 
   const deleteItem = (data) => {
     console.log('data to delte>>>>>>>>>>>', data)
@@ -105,11 +110,41 @@ export default function Home(props) {
               headCells = { headCells }
               rows = { rows }
               deleteItem = { deleteItem }
-              editItem = { editItem }            
+              editItem = { editItem }        
+              title = 'Home page slides'    
             />
           </div>
           
         </div>
+
+      <Button variant="outlined" onClick={() => setOpen(true)}>
+        Slide in alert dialog
+      </Button>
+
+        <Alert
+          open = { open }
+          label = "Edit Slides Details"
+          handleClose = { () => setOpen(false) }
+        >
+
+          <div className='hor-row panel-row'>
+            <InputComponent
+              placeholder = 'Slider Text'
+              label = 'Slider Text'
+              // value  = {email}
+              // onChange = { setEmail }
+              />
+          </div>
+
+          <DragAndDrop/>
+          <div className='hor-row panel-row'>
+            <ButtonComponent
+              label = 'Save'
+              // onClick = { submitData }
+              />
+          </div>
+
+        </Alert>
         
       </div>
     );

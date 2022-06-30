@@ -24,6 +24,9 @@ class InputComponent extends React.Component {
     render() {
         return (<div className='hor-row input-type-container-main'
             style={this.props.style} >
+                {this.props.label && <div className="hor-row label-text">
+                    { this.props.label }
+                </div>}
                 <input type = { this.props.type } 
                 placeholder = { this.props.placeholder}
                 value={this.props.value}
