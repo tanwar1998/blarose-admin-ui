@@ -6,6 +6,8 @@ import Slide from '@mui/material/Slide';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import {  Link } from "react-router-dom";
+import { connect } from "react-redux";
+import PERMANENT_ACTION from '../../Store/permanentAction';
 
 const navItem = [
     {
@@ -40,6 +42,10 @@ const navItem = [
     {
         key: 'GALLERY',
         link: 'gallery'
+    },
+    {
+        key: 'LOGOUT',
+        type: 'logout'
     }
 ]
 
@@ -49,13 +55,27 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 
 
-export default function Navbar() {
+function Navbar(props) {
     const [open, setOpen] = React.useState(false);
 
+    const logout = () => {
+        const permanentStoreData = {
+            key: 'user',
+            value: { 
+                isLogin: false,
+            }
+        }
+        console.log('reloatd')
+        props.updatePermanentStore(permanentStoreData);
+        window.setTimeout(()=>{
+            console.log('reloatd')
+          window.location.reload();
+        },1500)
+    }
     const NavItemList = () =>(
         navItem.map((item) => (
             <div className={'nav-item' +  (item.subItem?.length ? ' subitem-container-nav' : '')} >
-                { item.link ? (<Link to={"/" + item.link}>{ item.key } </Link>) : item.key}
+                { item.type ?(<span onClick={logout}> {item.key}</span>) : (<Link to={"/" + item.link}>{ item.key } </Link>)}
 
                 {item.subItem && <div className='nav-hover-content'>
                     <div className='hor-row'>
@@ -66,7 +86,8 @@ export default function Navbar() {
                         item.subItem.map((subItem, i)=>(
                             <div className='hor-row nav-label'
                                 style={{borderBottom: `${i !== (item.subItem.length -1) ? '1px solid #fff' : ''}`}}>
-                                    <Link to={"/" + subItem.link}>{ subItem.label } </Link>
+                                    {subItem.type ? (<span onClick={logout}> {subItem.label} dfk</span>)
+                                    :(<Link to={"/" + subItem.link}>{ subItem.label } </Link>)}
                             </div>
                         ))
                     }
@@ -129,3 +150,18 @@ export default function Navbar() {
       </NavigationBarContainer>
     );
   }
+
+  const mapStateToProps = (store) => {
+    return {
+        store,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updatePermanentStore: item => dispatch(PERMANENT_ACTION.updateStoreKey(item)),
+    };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

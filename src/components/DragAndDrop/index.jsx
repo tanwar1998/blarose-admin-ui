@@ -30,12 +30,13 @@ export default function DragAndDrop(props) {
         props.onChange(data)
       }
     }
-  const {acceptedFiles, getRootProps, getInputProps} = useDropzone({
+  const {getRootProps, getInputProps} = useDropzone({
+  // const {acceptedFiles, getRootProps, getInputProps} = useDropzone({
     onDropAccepted: onChange, 
     maxFiles: 1,
     accept: {'image/*': ['.png', '.gif', '.jpeg', '.jpg']}});
   
-  const files = acceptedFiles.map(file => (
+  const files = props.files?.map(file => (
     <li key={file.path}>
       {file.path} - {file.size} bytes
     </li>
