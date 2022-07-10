@@ -10,7 +10,7 @@ export let cacheReducerState = {
         loader:{
             display: false
         },
-        megaBrandProductListData : {
+        slidesData : {
             data:[],
             isAlreadyCalled:false
         },

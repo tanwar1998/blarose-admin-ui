@@ -8,6 +8,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import {  Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PERMANENT_ACTION from '../../Store/permanentAction';
+import LoaderComponent from '../loader/index.jsx';
 
 const navItem = [
     {
@@ -65,10 +66,8 @@ function Navbar(props) {
                 isLogin: false,
             }
         }
-        console.log('reloatd')
         props.updatePermanentStore(permanentStoreData);
         window.setTimeout(()=>{
-            console.log('reloatd')
           window.location.reload();
         },1500)
     }
@@ -131,6 +130,7 @@ function Navbar(props) {
                     </div>
                 </div>}
             </div>
+            <LoaderComponent/>
         </NavigationBarContent>
     )
 

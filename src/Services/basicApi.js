@@ -1,11 +1,13 @@
 import axios from 'axios';
+const API_PATH = process.env.REACT_APP_BASE_API_PATH + 'api/v1/';
+
 
 axios.defaults.withCredentials = true;
 
 export const axiosConfigReturn = (path, method = 'get', pathType = null) => {
     return {
         method: method,
-        url:  process.env.REACT_APP_BASE_API_PATH  + path,
+        url:  API_PATH  + path,
         headers: {
             'Content-Type': 'application/json',
         },
@@ -13,7 +15,7 @@ export const axiosConfigReturn = (path, method = 'get', pathType = null) => {
 }
 
 export const postAPI = async(path, data, temHeader) =>{
-    let base_path = process.env.REACT_APP_BASE_API_PATH + path;
+    let base_path = API_PATH + path;
     let headers = {
         'Accept': 'application/json', 
         'fcmToken': 'dfkldjflksdjfl',
@@ -32,7 +34,7 @@ export const postAPI = async(path, data, temHeader) =>{
 };
 
 export const getAPI = async(path, token) =>{
-    let base_path = process.env.REACT_APP_BASE_API_PATH + path;
+    let base_path = API_PATH + path;
     let headers = {
         'Accept': 'application/json',
     };
@@ -52,9 +54,9 @@ export const getAPI = async(path, token) =>{
 };
 
 export const putAPI = async(path, data, token) =>{
-    let base_path = process.env.REACT_APP_BASE_API_PATH + path;
+    let base_path = API_PATH + path;
     var result = await new Promise((resolve, reject) => {
-        axios.put(base_path+path, data, {
+        axios.put(base_path, data, {
             headers: {
                 'Accept': 'application/json',
                 ...token
@@ -72,7 +74,7 @@ export const putAPI = async(path, data, token) =>{
 };
 
 export const deleteAPI = async(path, token, ) =>{
-    let base_path = process.env.REACT_APP_BASE_API_PATH + path;
+    let base_path = API_PATH + path;
     var result = await new Promise((resolve, reject) => {
         var config = {
             method: 'delete',

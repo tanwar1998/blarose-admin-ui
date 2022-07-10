@@ -10,7 +10,7 @@ import Dashboard from "../pages/Dashboard/index.jsx";
 import Login from "../pages/Login/index.jsx";
 import Navbar from '../specificComponents/navbar/index.jsx';
 import FooterContainer from '../specificComponents/footer/index.jsx';
-import Loader from '../specificComponents/loader/index.jsx';
+import ToastifyComponent from '../components/Toastify';
 
 export default function App() {
     return(
@@ -21,7 +21,7 @@ export default function App() {
                 <Route path="/" element={<Dashboard/>} />
             </Routes>
             <FooterContainer/>
-            <Loader/>
+            <ToastifyComponent/>
         </Router>
     )
 };

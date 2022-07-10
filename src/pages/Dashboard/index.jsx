@@ -6,7 +6,7 @@ import { updateStore } from '../../Store/cacheAction';
 import PERMANENT_ACTION from '../../Store/permanentAction';
 import { postAPI, putAPI } from '../../Services/basicApi.js';
 import { Navigate } from 'react-router-dom';
-
+import getSlidesData from '../../Services/GetAPI/getSlidesData.js';
 
 function Container(props) {
 
@@ -15,6 +15,8 @@ function Container(props) {
     useEffect(()=>{
       if(!props.store?.permanentData?.data?.user?.isLogin){
         setRedirect(true);
+      }else{
+        props.getSlidesData(props.store);
       }
     }, [])
 
@@ -43,6 +45,7 @@ function Container(props) {
         <DashboardContainer>
            <Dashboard
             masterAPI = { masterAPI }
+            store = {props.store}
            />
         </DashboardContainer>
     );
@@ -56,6 +59,7 @@ function Container(props) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+      getSlidesData: (item, update = false) => dispatch(getSlidesData(item, update)),
         updateStore: item => dispatch(updateStore(item)),
         updatePermanentStore: item => dispatch(PERMANENT_ACTION.updateStoreKey(item)),
     };

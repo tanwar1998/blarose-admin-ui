@@ -67,7 +67,7 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
-          <Checkbox
+          {/* <Checkbox
             color="primary"
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
@@ -75,12 +75,11 @@ function EnhancedTableHead(props) {
             inputProps={{
               'aria-label': 'select all desserts',
             }}
-          />
+          /> */}
         </TableCell>
         {props.headCells?.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -208,23 +207,22 @@ export default function EnhancedTable(props) {
     setSelected([]);
   };
 
-  const handleClick = (event, name, rows) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event, id, rows) => {
+    const selectedIndex = selected.findIndex(x => x.id === id);
+    
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
+      newSelected.push(id)
+      // newSelected = newSelected.concat(selected.map((item)=> item.id), id);
+    }else{
+      selected.forEach((item)=>{
+        if(item.id !== id){
+          newSelected.push(item.id);
+        }
+      })
     }
-    const tempSelectedData = rows.filter(value => newSelected.includes(value.name));
+    const tempSelectedData = rows.filter(value => newSelected.includes(value.id));
     setSelected(tempSelectedData);
   };
 
@@ -241,7 +239,8 @@ export default function EnhancedTable(props) {
     setDense(event.target.checked);
   };
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
+  const isSelected = (id) => selected.findIndex(x => x.id === id) !== -1;
+
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
@@ -277,17 +276,17 @@ export default function EnhancedTable(props) {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.id);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name, rows)}
+                      onClick={(event) => handleClick(event, row.id, rows)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.id}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -305,9 +304,8 @@ export default function EnhancedTable(props) {
                             id={labelId}
                             scope="row"
                             padding={headCell.disablePadding ? 'none' : 'normal'}
-                            align={headCell.numeric ? 'right' : 'left'}
                         >
-                            {row[headCell.id]}
+                          { headCell.type === 'image' ? (<img src = {process.env.REACT_APP_BASE_API_PATH +  row[headCell.id]} alt={row[headCell.id]} style = {{width: '110px'}}  />) : row[headCell.id]}
                         </TableCell>
                       ))}
                     </TableRow>

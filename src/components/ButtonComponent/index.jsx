@@ -11,7 +11,7 @@ class ButtonComponent extends React.Component {
      *      style,
      *      label,
      *      value,
-     *      onSave
+     *      variant
      * } props 
      */
 
@@ -25,7 +25,8 @@ class ButtonComponent extends React.Component {
     render() {
         return (<div className='hor-row button-container-main'
             style={this.props.style} >
-            <Button variant="contained"
+            <Button 
+                variant={this.props.variant || "contained"}
                 onClick = { this.props.onClick } >
                 { this.props.label }
             </Button>

@@ -14,6 +14,18 @@
         }
 
     }
+    .MuiButton-outlined{
+        color: #FA4DAC;
+        border: 1px solid #FA4DAC!important;
+        background: #fff;
+        border-radius: 15px;
+
+        &:hover{    
+            background: #FA4DAC;
+            color: #fff;
+        }
+
+    }
 
 }
 

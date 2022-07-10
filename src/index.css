@@ -38,8 +38,13 @@ code {
   height: 100vh!important;
   margin: 0;
   max-height: 100vh!important;
-  /* left: -35px; */
-
+}
+.confirm-dialog .MuiPaper-elevation{
+  width: auto;
+  padding: 60px 20px;
+  max-width: 500px!important;
+  top: auto;
+  height: auto!important;
 }
 a, a:hover{
   color: inherit;

@@ -1,6 +1,6 @@
-import { Toastify } from '../Components/BasicComponents/Toastify';
-import { updateLoader } from '../Redux/Store/cacheAction';
-import { updatePermanentStore } from '../Redux/Store/permanentAction';
+import { Toastify } from '../components/Toastify/index.jsx';
+import { updateLoader } from '../Store/cacheAction';
+import { updatePermanentStore } from '../Store/permanentAction';
 
 
 export const handelErrorResponse = (err, dispatch) => {

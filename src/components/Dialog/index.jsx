@@ -3,6 +3,7 @@ import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import CloseIcon from '@mui/icons-material/Close';
 import styled from 'styled-components';
+import ButtonComponent from '../ButtonComponent/index.jsx';
 
 const DialogContentMain = styled.div`
     width: 100%;
@@ -32,12 +33,22 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function Alert(props) {
-
+  /**
+   * 
+   * @param {*
+   *      type: null || 'confirm',
+   *      open: boolean,
+   *      handleClose: ()
+   *      label
+   *      children
+   * } props 
+   */
 
   return (
     <div>
       <Dialog
         open = { props.open }
+        className = {props.type === 'confirm' ? 'confirm-dialog' : ''}
         TransitionComponent={Transition}
         keepMounted
         onClose={props.handleClose}
@@ -52,6 +63,19 @@ export default function Alert(props) {
             <div className='hor-row'>
                 { props.children }
             </div>
+            {props.type === 'confirm' && <div className='hor-row'>
+              <ButtonComponent
+                label = 'Cancel'
+                variant = 'outlined'
+                style = {{width: 'auto', marginRight: '20px'}}
+                onClick = { props.onCancel }
+                />
+              <ButtonComponent
+                label = 'Confirm'
+                style = {{width: 'auto', float: 'right'}}
+                onClick = { props.onConfirm }
+                />
+            </div> }
         </DialogContentMain>
       </Dialog>
     </div>

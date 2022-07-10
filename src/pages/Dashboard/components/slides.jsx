@@ -34,35 +34,34 @@ const rows = [
 
 
 const headCells = [
+  // {
+  //   id: 'name',
+  //   numeric: false,
+  //   disablePadding: true,
+  //   label: 'Dessert (100g serving)',
+  // },
+  // {
+  //   id: 'calories',
+  //   numeric: true,
+  //   disablePadding: false,
+  //   label: 'Calories',
+  // },
+  // {
+  //   id: 'fat',
+  //   numeric: true,
+  //   disablePadding: false,
+  //   label: 'Fat (g)',
+  // },
   {
-    id: 'name',
-    numeric: false,
-    disablePadding: true,
-    label: 'Dessert (100g serving)',
-  },
-  {
-    id: 'calories',
+    id: 'text',
     numeric: true,
     disablePadding: false,
-    label: 'Calories',
+    label: 'Text',
   },
   {
-    id: 'fat',
-    numeric: true,
-    disablePadding: false,
-    label: 'Fat (g)',
-  },
-  {
-    id: 'carbs',
-    numeric: true,
-    disablePadding: false,
-    label: 'Carbs (g)',
-  },
-  {
-    id: 'protein',
-    numeric: true,
-    disablePadding: false,
-    label: 'Protein (g)',
+    id: 'image',
+    type: 'image',
+    label: 'Image',
   },
 ];
 
@@ -70,15 +69,25 @@ const headCells = [
 
 export default function Slides(props) {
   // const [email, setEmail] = useState('');
+  const [openConfirmationDialog, setOpenConfirmationDialog] = useState(false);
   const [open, setOpen] = useState(false);
+  const [alertData, setAlertData] = useState({});
   const [slidesData, setSlidesData] = useState({text: '', image: []});
 
 
   const deleteItem = (data) => {
-    console.log('data to delte>>>>>>>>>>>', data)
+    setOpenConfirmationDialog(true)
   }
+
   const editItem = (data) => {
-    console.log('data to delte>>>>>>>>>>>', data)
+    const tmpEditData = { text: data[0].text, id: data[0].id, tmpImage: data[0].image  }
+    setSlidesData({...tmpEditData});
+    const tmpAlertData = {
+      open: true,
+      type: 'edit',
+      label: 'Edit Slide Item'
+    }
+    setAlertData(tmpAlertData)
   }
 
   const handleChange = (data, key = 'text') => {
@@ -87,42 +96,56 @@ export default function Slides(props) {
     setSlidesData({...tmpSlidesData});
   }
 
+  const handleEditBoxClose = ()=> {
+    setSlidesData({text: '', image: []});
+    setAlertData({open: false})
+    setAlertData({})
+ }
   const submitData = async() => {
-
     if(!slidesData.text){
       window.alert('Please provide text');
       return false;
     }
-    if(!slidesData.image){
+    if((alertData.type !== 'edit' && (!slidesData.image.length))){
       window.alert('Please provide an image');
       return false;
     }
     const uploadURL = 'upload';
-
-    var uploadData = new FormData();
-    uploadData.append('file',slidesData.image[0]);
-    const header = {
-        'Content-Type': 'multipart/form-data'
-      }
-
-
-    const uploadResponse = await props.masterAPI(uploadURL, uploadData, 'post', header);
-
-    if(uploadResponse?.filename){
-        const postAPIData = { 
-          image: uploadResponse.filename,
-          text: slidesData.text
+    let uploadResponse = '';
+    let checkIfFileUploaded = (alertData.type !== 'edit' || (alertData.type === 'edit' && slidesData.image?.length)) ;
+    if(checkIfFileUploaded){ 
+      let uploadData = new FormData();
+      uploadData.append('file',slidesData.image[0]);
+      const header = {
+          'Content-Type': 'multipart/form-data'
         }
-        const slideResponse = await props.masterAPI('home/slides', postAPIData);
-        if(slideResponse.type === 'success'){
+
+
+      uploadResponse = await props.masterAPI(uploadURL, uploadData, 'post', header);
+    }
+
+    if(uploadResponse && !uploadResponse){
+      window.alert('Someunrecognised error while uploading image');
+      return false;
+    }
+
+        const postAPIData = { 
+          image: uploadResponse?.filename ? uploadResponse.filename: slidesData.tmpImage ,
+          text: slidesData.text,
+        }
+
+        const URL = alertData.type === 'edit' ?  ('home/slides/' + slidesData.id + '/') : 'home/slides';
+        const method = alertData.type === 'edit' ? 'put' : 'post';
+        const slideResponse = await props.masterAPI(URL, postAPIData, method);
+        if(slideResponse?.type === 'success'){
           window.alert('slide added successfully!');
-          setSlidesData({text: '', image: []})
+          if(alertData.type !== 'edit'){
+            setSlidesData({text: '', image: []})
+          }
+          
         }else{
           window.alert('Some unrecognised error, please try again!')
         }
-    }else{
-        console.log('errro handling')
-    }
 
   }
 
@@ -133,7 +156,7 @@ export default function Slides(props) {
         <div className='hor-row table-container-main'>
         <Table
             headCells = { headCells }
-            rows = { rows }
+            rows = { props.store?.cacheData?.data?.slidesData.data || [] }
             deleteItem = { deleteItem }
             editItem = { editItem }        
             title = 'Home page slides'    
@@ -141,14 +164,14 @@ export default function Slides(props) {
         </div>
           
 
-      <Button variant="outlined" onClick={() => setOpen(true)}>
+      <Button variant="outlined" onClick={() => setAlertData({open: true})}>
         Add Item
       </Button>
 
         <Alert
-          open = { open }
-          label = "Edit Slides Details"
-          handleClose = { () => setOpen(false) }
+          open = { alertData.open }
+          label = {alertData.label || "Add Slides"}
+          handleClose = { handleEditBoxClose }
         >
 
           <div className='hor-row panel-row'>
@@ -173,6 +196,15 @@ export default function Slides(props) {
 
         </Alert>
         
+        <Alert
+          open = { openConfirmationDialog }
+          label = "Do You want to proceed"
+          type = 'confirm'
+
+          onCancel = { () => setOpenConfirmationDialog(false) }
+          onConfirm = { () => setOpenConfirmationDialog(false) }
+          handleClose = { () => setOpenConfirmationDialog(false) }
+        />
       </div>
     );
   }
