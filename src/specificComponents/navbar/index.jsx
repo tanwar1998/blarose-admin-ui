@@ -72,8 +72,9 @@ function Navbar(props) {
         },1500)
     }
     const NavItemList = () =>(
-        navItem.map((item) => (
-            <div className={'nav-item' +  (item.subItem?.length ? ' subitem-container-nav' : '')} >
+        navItem.map((item, index) => (
+            <div className={'nav-item' +  (item.subItem?.length ? ' subitem-container-nav' : '')}
+                key = { 'nav-item' + index} >
                 { item.type ?(<span onClick={logout}> {item.key}</span>) : (<Link to={"/" + item.link}>{ item.key } </Link>)}
 
                 {item.subItem && <div className='nav-hover-content'>
@@ -84,7 +85,8 @@ function Navbar(props) {
                     {
                         item.subItem.map((subItem, i)=>(
                             <div className='hor-row nav-label'
-                                style={{borderBottom: `${i !== (item.subItem.length -1) ? '1px solid #fff' : ''}`}}>
+                                style={{borderBottom: `${i !== (item.subItem.length -1) ? '1px solid #fff' : ''}`}}
+                                key = { 'subitem'+i } >
                                     {subItem.type ? (<span onClick={logout}> {subItem.label} dfk</span>)
                                     :(<Link to={"/" + subItem.link}>{ subItem.label } </Link>)}
                             </div>
@@ -138,7 +140,7 @@ function Navbar(props) {
       <NavigationBarContainer>
           { navContentMain() }
           <Dialog
-            open={open}
+            open={open || false }
             TransitionComponent={Transition}
             keepMounted
             onClose={ () => setOpen(false)}

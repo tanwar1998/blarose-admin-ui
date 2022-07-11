@@ -47,7 +47,7 @@ export default function Alert(props) {
   return (
     <div>
       <Dialog
-        open = { props.open }
+        open = { props.open || false }
         className = {props.type === 'confirm' ? 'confirm-dialog' : ''}
         TransitionComponent={Transition}
         keepMounted
@@ -68,12 +68,12 @@ export default function Alert(props) {
                 label = 'Cancel'
                 variant = 'outlined'
                 style = {{width: 'auto', marginRight: '20px'}}
-                onClick = { props.onCancel }
+                onClick = { props.handleClose }
                 />
               <ButtonComponent
                 label = 'Confirm'
                 style = {{width: 'auto', float: 'right'}}
-                onClick = { props.onConfirm }
+                onClick = { props.handleConfirm }
                 />
             </div> }
         </DialogContentMain>

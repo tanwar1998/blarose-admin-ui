@@ -33,7 +33,7 @@ export const postAPI = async(path, data, temHeader) =>{
     return result;
 };
 
-export const getAPI = async(path, token) =>{
+export const getAPI = async(path, temHeader) =>{
     let base_path = API_PATH + path;
     let headers = {
         'Accept': 'application/json',
@@ -53,13 +53,13 @@ export const getAPI = async(path, token) =>{
     return result;
 };
 
-export const putAPI = async(path, data, token) =>{
+export const putAPI = async(path, data, temHeader) =>{
     let base_path = API_PATH + path;
     var result = await new Promise((resolve, reject) => {
         axios.put(base_path, data, {
             headers: {
                 'Accept': 'application/json',
-                ...token
+                ...temHeader
             }}).then((response)=>{
             if (response.status >= 400 && response.status < 600) {
                 reject(Error("put api error"));
@@ -73,15 +73,17 @@ export const putAPI = async(path, data, token) =>{
     return result;
 };
 
-export const deleteAPI = async(path, token, ) =>{
+export const deleteAPI = async(path,data,  temHeader, ) =>{
     let base_path = API_PATH + path;
     var result = await new Promise((resolve, reject) => {
         var config = {
             method: 'delete',
-            url: base_path+path,
+            url: base_path,
             headers: {
                 'Accept': 'application/json',
-                ...token
+                'fcmToken': 'dfkldjflksdjfl',
+                'platform' : 'web',
+                ...temHeader
             },
             // data : data
           };

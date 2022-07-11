@@ -298,11 +298,12 @@ export default function EnhancedTable(props) {
                           }}
                         />
                       </TableCell>
-                      {props.headCells?.map((headCell) => (
+                      {props.headCells?.map((headCell, cellIndex) => (
                         <TableCell
                             component="th"
                             id={labelId}
                             scope="row"
+                            key = { 'cell-index' + cellIndex }
                             padding={headCell.disablePadding ? 'none' : 'normal'}
                         >
                           { headCell.type === 'image' ? (<img src = {process.env.REACT_APP_BASE_API_PATH +  row[headCell.id]} alt={row[headCell.id]} style = {{width: '110px'}}  />) : row[headCell.id]}
