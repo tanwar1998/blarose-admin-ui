@@ -8,6 +8,8 @@ import {
 
 import Dashboard from "../pages/Dashboard/index.jsx";
 import Login from "../pages/Login/index.jsx";
+import Client from "../pages/Client/index.jsx";
+import Gallery from "../pages/Gallery/index.jsx";
 import Navbar from '../specificComponents/navbar/index.jsx';
 import FooterContainer from '../specificComponents/footer/index.jsx';
 import ToastifyComponent from '../components/Toastify';
@@ -18,6 +20,8 @@ export default function App() {
             <Navbar/>
             <Routes >
                 <Route path="/login" element={<Login/>} />
+                <Route path="/client" element={<Client/>} />
+                <Route path="/gallery" element={<Gallery/>} />
                 <Route path="/" element={<Dashboard/>} />
             </Routes>
             <FooterContainer/>

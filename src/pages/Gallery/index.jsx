@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { DashboardContainer } from './style.js';
+import { GalleryContainer } from './style.js';
 import Dashboard from './components/dashboard.jsx';
 import { connect } from "react-redux";
 import { updateStore } from '../../Store/cacheAction';
 import PERMANENT_ACTION from '../../Store/permanentAction';
 import { postAPI, putAPI, deleteAPI } from '../../Services/basicApi.js';
 import { Navigate } from 'react-router-dom';
-import getSlidesData from '../../Services/GetAPI/getSlidesData.js';
-import getExperienceData from '../../Services/GetAPI/getExperienceData.js';
-import getServiceData from '../../Services/GetAPI/getServiceData.js';
-import getSuccessStoryData from '../../Services/GetAPI/getSuccessStoryData.js';
+import getGalleryData from '../../Services/GetAPI/getGalleryData.js';
 
-function DashboardContainerMain(props) {
+function GalleryContainerMain(props) {
 
     const [reDirect, setRedirect] = useState(false);
 
@@ -19,10 +16,7 @@ function DashboardContainerMain(props) {
       if(!props.store?.permanentData?.data?.user?.isLogin){
         setRedirect(true);
       }else{
-        props.getSlidesData(props.store);
-        props.getExperienceData(props.store);
-        props.getServiceData(props.store);
-        props.getSuccessStoryData(props.store);
+        props.getGalleryData(props.store);
       }
     }, [])
 
@@ -50,16 +44,13 @@ function DashboardContainerMain(props) {
       }
     
     return (
-        <DashboardContainer>
+        <GalleryContainer>
            <Dashboard
             masterAPI = { masterAPI }
             store = {props.store}
-            getSlidesData = { props.getSlidesData  }
-            getSuccessStoryData = { props.getSuccessStoryData  }
-            getExperienceData = { props.getExperienceData  }
-            getServiceData = { props.getServiceData  }
+            getGalleryData = { props.getGalleryData  }
            />
-        </DashboardContainer>
+        </GalleryContainer>
     );
   }
 
@@ -71,14 +62,11 @@ function DashboardContainerMain(props) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      getSlidesData: (item, update = false) => dispatch(getSlidesData(item, update)),
-      getSuccessStoryData: (item, update = false) => dispatch(getSuccessStoryData(item, update)),
-      getExperienceData: (item, update = false) => dispatch(getExperienceData(item, update)),
-      getServiceData: (item, update = false) => dispatch(getServiceData(item, update)),
+      getGalleryData: (item, update = false) => dispatch(getGalleryData(item, update)),
         updateStore: item => dispatch(updateStore(item)),
         updatePermanentStore: item => dispatch(PERMANENT_ACTION.updateStoreKey(item)),
     };
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainerMain);
+export default connect(mapStateToProps, mapDispatchToProps)(GalleryContainerMain);

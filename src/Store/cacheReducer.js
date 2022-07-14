@@ -3,14 +3,30 @@ import ACTIONS from "./cacheAction";
 export let cacheReducerState = {
     data: {
         // Enter the keys, in alphabetical order
-        countryLists: {
+        clientData: {
             data: [],
             isAlreadyCalled: false
+        },
+        experienceData : {
+            data:[],
+            isAlreadyCalled:false
+        },
+        galleryData : {
+            data:[],
+            isAlreadyCalled:false
         },
         loader:{
             display: false
         },
         slidesData : {
+            data:[],
+            isAlreadyCalled:false
+        },
+        serviceData : {
+            data:[],
+            isAlreadyCalled:false
+        },
+        successStoryData : {
             data:[],
             isAlreadyCalled:false
         },

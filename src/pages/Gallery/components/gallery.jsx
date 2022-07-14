@@ -9,24 +9,6 @@ import { Toastify } from '../../../components/Toastify/index.jsx';
 
 
 const headCells = [
-  // {
-  //   id: 'name',
-  //   numeric: false,
-  //   disablePadding: true,
-  //   label: 'Dessert (100g serving)',
-  // },
-  // {
-  //   id: 'calories',
-  //   numeric: true,
-  //   disablePadding: false,
-  //   label: 'Calories',
-  // },
-  // {
-  //   id: 'fat',
-  //   numeric: true,
-  //   disablePadding: false,
-  //   label: 'Fat (g)',
-  // },
   {
     id: 'text',
     numeric: true,
@@ -42,10 +24,10 @@ const headCells = [
 
 
 
-export default function Slides(props) {
+export default function Gallery(props) {
   const [alertData, setAlertData] = useState({});
   const [deleteData, setDeleteData] = useState({id: '', open: false});
-  const [slidesData, setSlidesData] = useState({text: '', image: []});
+  const [galleryData, setGalleryData] = useState({text: '', image: []});
 
 
   const deleteItem = (data) => {
@@ -57,12 +39,12 @@ export default function Slides(props) {
   }
 
   const handleDeleteDataConfirm = async() => {
-    const URL = 'home/slides/' + deleteData.id;
-    const slideResponse = await props.masterAPI(URL, {}, 'delete');
-    if(slideResponse?.type === 'success'){
-        Toastify('success', "slide deleted successfully!")
+    const URL = 'gallery/gallery/' + deleteData.id;
+    const galleryResponse = await props.masterAPI(URL, {}, 'delete');
+    if(galleryResponse?.type === 'success'){
+        Toastify('success', "gallery item deleted successfully!")
         setDeleteData({open: false});
-        props.getSlidesData(props.store, true);
+        props.getGalleryData(props.store, true);
     }else{
       Toastify('error', "Some unrecognised error, please try again")
     }
@@ -70,41 +52,41 @@ export default function Slides(props) {
 
   const editItem = (data) => {
     const tmpEditData = { text: data[0].text, id: data[0].id, tmpImage: data[0].image  }
-    setSlidesData({...tmpEditData});
+    setGalleryData({...tmpEditData});
     const tmpAlertData = {
       open: true,
       type: 'edit',
-      label: 'Edit Slide Item'
+      label: 'Edit Gallery Item'
     }
     setAlertData(tmpAlertData)
   }
 
   const handleChange = (data, key = 'text') => {
-    const tmpSlidesData = JSON.parse(JSON.stringify(slidesData));
-    tmpSlidesData[key] = data;
-    setSlidesData({...tmpSlidesData});
+    const tmpGalleryData = JSON.parse(JSON.stringify(galleryData));
+    tmpGalleryData[key] = data;
+    setGalleryData({...tmpGalleryData});
   }
 
   const handleEditBoxClose = ()=> {
-    setSlidesData({text: '', image: []});
+    setGalleryData({text: '', image: []});
     setAlertData({open: false})
     setAlertData({})
  }
   const submitData = async() => {
-    if(!slidesData.text){
+    if(!galleryData.text){
       Toastify('error', "Please provide text!")
       return false;
     }
-    if((alertData.type !== 'edit' && (!slidesData.image.length))){
+    if((alertData.type !== 'edit' && (!galleryData.image.length))){
       Toastify('error', "Please provide an image!")
       return false;
     }
     const uploadURL = 'upload';
     let uploadResponse = '';
-    let checkIfFileUploaded = (alertData.type !== 'edit' || (alertData.type === 'edit' && slidesData.image?.length)) ;
+    let checkIfFileUploaded = (alertData.type !== 'edit' || (alertData.type === 'edit' && galleryData.image?.length)) ;
     if(checkIfFileUploaded){ 
       let uploadData = new FormData();
-      uploadData.append('file',slidesData.image[0]);
+      uploadData.append('file',galleryData.image[0]);
       const header = {
           'Content-Type': 'multipart/form-data'
         }
@@ -117,21 +99,21 @@ export default function Slides(props) {
     }
 
         const postAPIData = { 
-          image: uploadResponse?.filename ? uploadResponse.filename: slidesData.tmpImage ,
-          text: slidesData.text,
+          image: uploadResponse?.filename ? uploadResponse.filename: galleryData.tmpImage ,
+          text: galleryData.text,
         }
 
-        const URL = alertData.type === 'edit' ?  ('home/slides/' + slidesData.id + '/') : 'home/slides';
+        const URL = alertData.type === 'edit' ?  ('gallery/gallery/' + galleryData.id + '/') : 'gallery/gallery';
         const method = alertData.type === 'edit' ? 'put' : 'post';
-        const slideResponse = await props.masterAPI(URL, postAPIData, method);
-        if(slideResponse?.type === 'success'){
-          Toastify('success', "slide added successfully")
+        const galleryResponse = await props.masterAPI(URL, postAPIData, method);
+        if(galleryResponse?.type === 'success'){
+          Toastify('success', alertData.type === 'edit' ? "gallery  item updated successfully " : "gallery  item added successfully")
           if(alertData.type !== 'edit'){
-            setSlidesData({text: '', image: []})
+            setGalleryData({text: '', image: []})
           }
-          props.getSlidesData(props.store, true);
+          props.getGalleryData(props.store, true);
         }else{
-          Toastify('error', "ome unrecognised error, please try again!")
+          Toastify('error', "Some unrecognised error, please try again!")
         }
   }
 
@@ -142,10 +124,10 @@ export default function Slides(props) {
         <div className='hor-row table-container-main'>
         <Table
             headCells = { headCells }
-            rows = { props.store?.cacheData?.data?.slidesData.data || [] }
+            rows = { props.store?.cacheData?.data?.galleryData.data || [] }
             deleteItem = { deleteItem }
             editItem = { editItem }        
-            title = 'Home page slides'    
+            title = 'Gallery '    
         />
         </div>
           
@@ -156,22 +138,22 @@ export default function Slides(props) {
 
         <Alert
           open = { alertData.open }
-          label = {alertData.label || "Add Slides"}
+          label = {alertData.label || "Add Gallery Image"}
           handleClose = { handleEditBoxClose }
         >
 
           <div className='hor-row panel-row'>
             <InputComponent
-              placeholder = 'Slider Text'
-              label = 'Slider Text'
-              value  = {slidesData.text || ''}
+              placeholder = 'Gallery Text'
+              label = 'Gallery Text'
+              value  = {galleryData.text || ''}
               onChange = { handleChange }
               />
           </div>
 
           <DragAndDrop
               onChange = {(data) => handleChange(data, 'image') }
-              files = {  slidesData.image  }
+              files = {  galleryData.image  }
             />
           <div className='hor-row panel-row'>
             <ButtonComponent

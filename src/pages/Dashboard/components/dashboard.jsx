@@ -1,8 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Slides from './slides.jsx';
+import SuccessStory from './successStory.jsx';
+import Service from './service.jsx';
+import Experience from './experience.jsx';
 
 export default function Home(props) {
-  // const [email, setEmail] = useState('');
+  const [currentComponent, setCurrentComponent] = useState('service');
+
+  const elements = [
+    {
+      label: 'Slides',
+      value: 'slides'
+    },
+    {
+      label: 'Success stories',
+      value: 'successStory'
+    },
+    {
+      label: 'Services',
+      value: 'service'
+    },
+    {
+      label: 'Premier Properties',
+      value: ''
+    },
+    {
+      label: 'Experience',
+      value: 'experience'
+    },
+  ]
 
 
 
@@ -14,28 +40,27 @@ export default function Home(props) {
           </h2>
 
           <div className='hor-row tabs-container-main'>
-            <span className='tab-item selected-tab'>
-              Slides
-            </span>
-            <span className='tab-item'>
-              Services
-            </span>
-            <span className='tab-item'>
-              Success stories
-            </span>
-            <span className='tab-item'>
-              Premier Properties
-            </span>
-            <span className='tab-item'>
-              Experience
-            </span>
+            {
+              elements.map((item)=>(
+                <span className={'tab-item' + ( item.value === currentComponent ? ' selected-tab': '' ) }
+                  key = { item.value } 
+                  onClick = { ()=> setCurrentComponent(item.value)}
+                  >
+                  { item.label }
+                </span>
+              ))
+            }
           </div>
 
-          <Slides
-            { ...props }/>
-
+            { currentComponent === 'slides' && <Slides
+              { ...props }/>}
+            {currentComponent === 'successStory' && <SuccessStory
+              { ...props }/>}
+            {currentComponent === 'experience' && <Experience
+              { ...props }/>}
+            {currentComponent === 'service' && <Service
+              { ...props }/>}
         </div>
-
       </div>
     );
   }

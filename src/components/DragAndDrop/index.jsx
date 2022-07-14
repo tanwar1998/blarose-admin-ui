@@ -46,7 +46,7 @@ export default function DragAndDrop(props) {
   return (
     <DropMain className="container">
       <div className='hor-row label'>
-        Select Slide Image
+        { props.label || 'Select Image'}
       </div>
       <div {...getRootProps({className: 'dropzone'})}>
         <input {...getInputProps()}
