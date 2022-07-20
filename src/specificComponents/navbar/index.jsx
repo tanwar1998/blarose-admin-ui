@@ -21,20 +21,7 @@ const navItem = [
     },
     {
         key: 'ABOUT US',
-        subItem: [
-            {
-                label: 'About Us',
-                link: 'about-us'
-            },
-            {
-                label: 'Our Team',
-                link: 'our-team'
-            },
-            {
-                label: 'Contact Us',
-                link: 'contact-us'
-            },
-        ]
+        link: 'about-us'
     },
     {
         key: 'CLIENT',

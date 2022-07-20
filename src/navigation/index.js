@@ -9,6 +9,7 @@ import {
 import Dashboard from "../pages/Dashboard/index.jsx";
 import Login from "../pages/Login/index.jsx";
 import Client from "../pages/Client/index.jsx";
+import AboutUS from "../pages/AboutUS/index.jsx";
 import Gallery from "../pages/Gallery/index.jsx";
 import Navbar from '../specificComponents/navbar/index.jsx';
 import FooterContainer from '../specificComponents/footer/index.jsx';
@@ -21,6 +22,7 @@ export default function App() {
             <Routes >
                 <Route path="/login" element={<Login/>} />
                 <Route path="/client" element={<Client/>} />
+                <Route path="/about-us" element={<AboutUS/>} />
                 <Route path="/gallery" element={<Gallery/>} />
                 <Route path="/" element={<Dashboard/>} />
             </Routes>

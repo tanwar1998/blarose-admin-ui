@@ -3,16 +3,16 @@ import { axiosConfigReturn } from '../../Services/basicApi';
 import { updateStore, updateLoader } from '../../Store/cacheAction';
 import { handelErrorResponse } from '../helper';
 
-const getSuccessStoryData = (data, update = false) => {
+const getTeamData = (data, update = false) => {
     return function (dispatch) {
-        if (!data.cacheData.data.successStoryData.isAlreadyCalled || update) {
+        if (!data.cacheData.data.teamData.isAlreadyCalled || update) {
             dispatch(updateLoader(true));
-            const config = axiosConfigReturn('home/story', 'get');
+            const config = axiosConfigReturn('about/team', 'get');
             axios(config).then((response) => {
                 dispatch(updateLoader(false));
                 if (response?.data?.type === 'success') {
                     const storeData = {
-                        key: 'successStoryData',
+                        key: 'teamData',
                         value: {
                             data: response.data.data.result,
                             isAlreadyCalled: true
@@ -27,4 +27,4 @@ const getSuccessStoryData = (data, update = false) => {
     }
 };
 
-export default getSuccessStoryData;
+export default getTeamData;

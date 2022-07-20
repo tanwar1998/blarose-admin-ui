@@ -3,6 +3,10 @@ import ACTIONS from "./cacheAction";
 export let cacheReducerState = {
     data: {
         // Enter the keys, in alphabetical order
+        aboutSStoryData: {
+            data: [],
+            isAlreadyCalled: false
+        },
         clientData: {
             data: [],
             isAlreadyCalled: false
@@ -18,6 +22,10 @@ export let cacheReducerState = {
         loader:{
             display: false
         },
+        previousShowData : {
+            data:[],
+            isAlreadyCalled:false
+        },
         slidesData : {
             data:[],
             isAlreadyCalled:false
@@ -27,6 +35,10 @@ export let cacheReducerState = {
             isAlreadyCalled:false
         },
         successStoryData : {
+            data:[],
+            isAlreadyCalled:false
+        },
+        teamData : {
             data:[],
             isAlreadyCalled:false
         },

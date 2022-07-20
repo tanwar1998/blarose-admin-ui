@@ -5,7 +5,7 @@ import { handelErrorResponse } from '../helper';
 
 const getClientData = (data, update = false) => {
     return function (dispatch) {
-        if (!data.cacheData.data.galleryData.isAlreadyCalled || update) {
+        if (!data.cacheData.data.clientData.isAlreadyCalled || update) {
             dispatch(updateLoader(true));
             const config = axiosConfigReturn('client/client', 'get');
             axios(config).then((response) => {

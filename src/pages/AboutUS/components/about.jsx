@@ -3,30 +3,11 @@ import InputComponent from '../../../components/InputComponent/index.jsx';
 import Table from '../../../components/Table/index.jsx';
 import Button from '@mui/material/Button';
 import Alert from '../../../components/Dialog/index.jsx';
-import DragAndDrop from '../../../components/DragAndDrop/index.jsx';
 import ButtonComponent from '../../../components/ButtonComponent/index.jsx';
 import { Toastify } from '../../../components/Toastify/index.jsx';
 
 
 const headCells = [
-  // {
-  //   id: 'name',
-  //   numeric: false,
-  //   disablePadding: true,
-  //   label: 'Dessert (100g serving)',
-  // },
-  // {
-  //   id: 'calories',
-  //   numeric: true,
-  //   disablePadding: false,
-  //   label: 'Calories',
-  // },
-  // {
-  //   id: 'fat',
-  //   numeric: true,
-  //   disablePadding: false,
-  //   label: 'Fat (g)',
-  // },
   {
     id: 'text',
     numeric: true,
@@ -34,18 +15,25 @@ const headCells = [
     label: 'Text',
   },
   {
-    id: 'image',
-    type: 'image',
-    label: 'Image',
+    id: 'date',
+    numeric: true,
+    disablePadding: false,
+    label: 'Date',
   },
+  {
+    id: 'location',
+    numeric: true,
+    disablePadding: false,
+    label: 'Location',
+  }
 ];
 
 
 
-export default function Slides(props) {
+export default function About(props) {
   const [alertData, setAlertData] = useState({});
   const [deleteData, setDeleteData] = useState({id: '', open: false});
-  const [slidesData, setSlidesData] = useState({text: '', image: []});
+  const [aboutData, setAboutData] = useState({text: '', date: '', location: ''});
 
 
   const deleteItem = (data) => {
@@ -57,79 +45,68 @@ export default function Slides(props) {
   }
 
   const handleDeleteDataConfirm = async() => {
-    const URL = 'home/slides/' + deleteData.id;
+    const URL = 'about/sstory/' + deleteData.id;
     const slideResponse = await props.masterAPI(URL, {}, 'delete');
     if(slideResponse?.type === 'success'){
-        Toastify('success', "slide deleted successfully!")
+        Toastify('success', "About us item deleted successfully!")
         setDeleteData({open: false});
-        props.getSlidesData(props.store, true);
+        props.getAboutSStoryData(props.store, true);
     }else{
       Toastify('error', "Some unrecognised error, please try again")
     }
   }
 
   const editItem = (data) => {
-    const tmpEditData = { text: data[0].text, id: data[0].id, tmpImage: data[0].image  }
-    setSlidesData({...tmpEditData});
+    const tmpEditData = { text: data[0].text, id: data[0].id, date: data[0].date, location: data[0].location  }
+    setAboutData({...tmpEditData});
     const tmpAlertData = {
       open: true,
       type: 'edit',
-      label: 'Edit Slide Item'
+      label: 'Edit About us Item'
     }
     setAlertData(tmpAlertData)
   }
 
   const handleChange = (data, key = 'text') => {
-    const tmpSlidesData = JSON.parse(JSON.stringify(slidesData));
+    const tmpSlidesData = JSON.parse(JSON.stringify(aboutData));
     tmpSlidesData[key] = data;
-    setSlidesData({...tmpSlidesData});
+    setAboutData({...tmpSlidesData});
   }
 
   const handleEditBoxClose = ()=> {
-    setSlidesData({text: '', image: []});
+    setAboutData({text: '', date: '', location: ''});
     setAlertData({open: false})
     setAlertData({})
  }
   const submitData = async() => {
-    if(!slidesData.text){
+    if(!aboutData.text){
       Toastify('error', "Please provide text!")
       return false;
     }
-    if((alertData.type !== 'edit' && (!slidesData.image.length))){
-      Toastify('error', "Please provide an image!")
+    if(!aboutData.date){
+      Toastify('error', "Please provide date!")
       return false;
     }
-    const uploadURL = 'upload';
-    let uploadResponse = '';
-    let checkIfFileUploaded = (alertData.type !== 'edit' || (alertData.type === 'edit' && slidesData.image?.length)) ;
-    if(checkIfFileUploaded){ 
-      let uploadData = new FormData();
-      uploadData.append('file',slidesData.image[0]);
-      const header = {
-          'Content-Type': 'multipart/form-data'
-        }
-      uploadResponse = await props.masterAPI(uploadURL, uploadData, 'post', header);
-    }
-
-    if(uploadResponse && !uploadResponse){
-      Toastify('error', "Some unrecognised error while uploading image!")
+    if(!aboutData.location){
+      Toastify('error', "Please provide location!")
       return false;
     }
 
         const postAPIData = { 
-          image: uploadResponse?.filename ? uploadResponse.filename: slidesData.tmpImage ,
-          text: slidesData.text,
+          text: aboutData.text,
+          date: aboutData.date,
+          location: aboutData.location,
         }
 
-        const URL = alertData.type === 'edit' ?  ('home/slides/' + slidesData.id + '/') : 'home/slides';
+        const URL = alertData.type === 'edit' ?  ('about/sstory/' + aboutData.id + '/') : 'about/sstory/';
         const method = alertData.type === 'edit' ? 'put' : 'post';
         const slideResponse = await props.masterAPI(URL, postAPIData, method);
         if(slideResponse?.type === 'success'){
-          Toastify('success', "slide added successfully")
+          Toastify('success', "About us item added successfully")
           if(alertData.type !== 'edit'){
-            setSlidesData({text: '', image: []})
+            setAboutData({text: '', date: '', location: ''})
           }
-          props.getSlidesData(props.store, true);
+          props.getAboutSStoryData(props.store, true);
         }else{
           Toastify('error', "some unrecognised error, please try again!")
         }
@@ -142,10 +119,10 @@ export default function Slides(props) {
         <div className='hor-row table-container-main'>
         <Table
             headCells = { headCells }
-            rows = { props.store?.cacheData?.data?.slidesData.data || [] }
+            rows = { props.store?.cacheData?.data?.aboutSStoryData.data || [] }
             deleteItem = { deleteItem }
             editItem = { editItem }        
-            title = 'Home page slides'    
+            title = 'About Us Success Story'    
         />
         </div>
           
@@ -156,23 +133,35 @@ export default function Slides(props) {
 
         <Alert
           open = { alertData.open }
-          label = {alertData.label || "Add Slides"}
+          label = {alertData.label || "Add About US Success Story"}
           handleClose = { handleEditBoxClose }
         >
 
           <div className='hor-row panel-row'>
             <InputComponent
-              placeholder = 'Slider Text'
-              label = 'Slider Text'
-              value  = {slidesData.text || ''}
+              placeholder = 'Text'
+              label = 'Text'
+              value  = {aboutData.text || ''}
               onChange = { handleChange }
               />
           </div>
+          <div className='hor-row panel-row'>
+            <InputComponent
+              placeholder = 'Date'
+              label = 'Date'
+              value  = {aboutData.date || ''}
+              onChange = { (data) => handleChange(data, 'date') }
+              />
+          </div>
+          <div className='hor-row panel-row'>
+            <InputComponent
+              placeholder = 'Location'
+              label = 'Location'
+              value  = {aboutData.location || ''}
+              onChange = { (data) => handleChange(data, 'location') }
+              />
+          </div>
 
-          <DragAndDrop
-              onChange = {(data) => handleChange(data, 'image') }
-              files = {  slidesData.image  }
-            />
           <div className='hor-row panel-row'>
             <ButtonComponent
               label = 'Save'
