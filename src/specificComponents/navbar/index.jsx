@@ -16,10 +16,6 @@ const navItem = [
         link: ' '
     },
     {
-        key: 'SERVICES',
-        link: 'services'
-    },
-    {
         key: 'ABOUT US',
         link: 'about-us'
     },

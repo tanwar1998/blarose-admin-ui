@@ -22,6 +22,14 @@ export let cacheReducerState = {
         loader:{
             display: false
         },
+        ppItemData : {
+            data:[],
+            isAlreadyCalled:false
+        },
+        ppLocationData : {
+            data:[],
+            isAlreadyCalled:false
+        },
         previousShowData : {
             data:[],
             isAlreadyCalled:false

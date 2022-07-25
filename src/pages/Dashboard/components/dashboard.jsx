@@ -3,9 +3,11 @@ import Slides from './slides.jsx';
 import SuccessStory from './successStory.jsx';
 import Service from './service.jsx';
 import Experience from './experience.jsx';
+import PPLocation from './ppLocation.jsx';
+import PremierProperty from './premierProperties.jsx';
 
 export default function Home(props) {
-  const [currentComponent, setCurrentComponent] = useState('service');
+  const [currentComponent, setCurrentComponent] = useState('PPLocation');
 
   const elements = [
     {
@@ -22,7 +24,11 @@ export default function Home(props) {
     },
     {
       label: 'Premier Properties',
-      value: ''
+      value: 'premierProperty'
+    },
+    {
+      label: 'Premier Properties Location',
+      value: 'PPLocation'
     },
     {
       label: 'Experience',
@@ -59,6 +65,10 @@ export default function Home(props) {
             {currentComponent === 'experience' && <Experience
               { ...props }/>}
             {currentComponent === 'service' && <Service
+              { ...props }/>}
+            {currentComponent === 'premierProperty' && <PremierProperty
+              { ...props }/>}
+            {currentComponent === 'PPLocation' && <PPLocation
               { ...props }/>}
         </div>
       </div>

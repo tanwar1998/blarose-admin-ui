@@ -10,6 +10,8 @@ import getSlidesData from '../../Services/GetAPI/getSlidesData.js';
 import getExperienceData from '../../Services/GetAPI/getExperienceData.js';
 import getServiceData from '../../Services/GetAPI/getServiceData.js';
 import getSuccessStoryData from '../../Services/GetAPI/getSuccessStoryData.js';
+import getPPLocationData from '../../Services/GetAPI/getPPLocationData.js';
+import getPPItemData from '../../Services/GetAPI/getPPItemData.js';
 
 function DashboardContainerMain(props) {
 
@@ -18,10 +20,12 @@ function DashboardContainerMain(props) {
     useEffect(()=>{
       if(!props.store?.permanentData?.data?.user?.isLogin){
         setRedirect(true);
-      }else{
+      }else {
         props.getSlidesData(props.store);
         props.getExperienceData(props.store);
         props.getServiceData(props.store);
+        props.getPPItemData(props.store);
+        props.getPPLocationData(props.store);
         props.getSuccessStoryData(props.store);
       }
     }, [])
@@ -56,6 +60,8 @@ function DashboardContainerMain(props) {
             store = {props.store}
             getSlidesData = { props.getSlidesData  }
             getSuccessStoryData = { props.getSuccessStoryData  }
+            getPPItemData = { props.getPPItemData  }
+            getPPLocationData = { props.getPPLocationData  }
             getExperienceData = { props.getExperienceData  }
             getServiceData = { props.getServiceData  }
            />
@@ -72,6 +78,8 @@ function DashboardContainerMain(props) {
 const mapDispatchToProps = (dispatch) => {
     return {
       getSlidesData: (item, update = false) => dispatch(getSlidesData(item, update)),
+      getPPItemData: (item, update = false) => dispatch(getPPItemData(item, update)),
+      getPPLocationData: (item, update = false) => dispatch(getPPLocationData(item, update)),
       getSuccessStoryData: (item, update = false) => dispatch(getSuccessStoryData(item, update)),
       getExperienceData: (item, update = false) => dispatch(getExperienceData(item, update)),
       getServiceData: (item, update = false) => dispatch(getServiceData(item, update)),
